@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assests/world/WORLD assests/grass/grass wind/type1/anim3.png" type="Texture" id=1]
+[ext_resource path="res://assests/world/WORLD assests/grass/grass wind/type1/anim1.png" type="Texture" id=2]
+[ext_resource path="res://assests/world/WORLD assests/grass/grass wind/type1/anim2.png" type="Texture" id=3]
+[ext_resource path="res://assests/world/WORLD assests/grass/grass wind/type1/anim4.png" type="Texture" id=4]
+[ext_resource path="res://assests/world/WORLD assests/grass/grass wind/type1/anim5.png" type="Texture" id=5]
+[ext_resource path="res://assests/world/WORLD assests/grass/grass wind/type1/anim6.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "wind",
+"speed": 5.0
+} ]
+
+[node name="grass_1" type="AnimatedSprite"]
+frames = SubResource( 1 )
+animation = "wind"
+playing = true

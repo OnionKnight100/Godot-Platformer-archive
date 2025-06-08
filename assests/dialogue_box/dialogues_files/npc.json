@@ -1,0 +1,7 @@
+[
+    {"name": "NPC" , "identity": "Butcher", "text": "Hello dude whats up!"},
+    {"name": "Player" , "text": "good!"},
+    {"name": "NPC" , "text": "heard about the king!"},
+    {"name": "Player" , "text": "nope !"},
+    {"name": "NPC" , "text": "STFU"}
+]

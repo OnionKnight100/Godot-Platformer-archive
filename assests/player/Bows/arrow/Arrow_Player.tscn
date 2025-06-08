@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assests/player/Bows/arrow/Arrow.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Area2D
+
+var dir = null
+var damage = 30
+var attack_dir : bool
+
+func _ready() -> void:
+	set_as_toplevel(true)
+
+func _process(delta: float) -> void:
+	if dir == -1:
+		$Sprite.flip_h = true
+	elif dir == 1:
+		$Sprite.flip_h = false
+	position.x += 250 * delta * dir
+
+func _attack_dir_here(i):
+	attack_dir = i
+
+
+func _on_Arrow_Player_area_entered(area: Area2D) -> void:
+	if area.is_in_group(\"Enemy\"):
+		var enemy = area.get_parent().get_parent()
+		enemy.health -= damage
+		if attack_dir == true:
+			enemy._knock_back(true)
+		else:
+			enemy._knock_back(false)
+		queue_free()
+
+
+func _on_Arrow_Player_body_entered(body: Node) -> void:
+	if body.is_in_group(\"Ground\"):
+		queue_free()
+		#struck animation here
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4.75598, 1.03083 )
+
+[node name="Arrow_Player" type="Area2D"]
+collision_mask = 2
+script = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 5, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 6.29696, 0.412945 )
+shape = SubResource( 2 )
+
+[connection signal="area_entered" from="." to="." method="_on_Arrow_Player_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Arrow_Player_body_entered"]

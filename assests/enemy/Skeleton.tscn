@@ -1,0 +1,403 @@
+[gd_scene load_steps=43 format=2]
+
+[ext_resource path="res://assests/enemy/skeleton_animations/Idle/skeleton idle 2.png" type="Texture" id=1]
+[ext_resource path="res://assests/enemy/skeleton.gd" type="Script" id=2]
+[ext_resource path="res://assests/enemy/skeleton_animations/Idle/skeleton idle 1.png" type="Texture" id=3]
+[ext_resource path="res://assests/enemy/skeleton_animations/Idle/skeleton idle 3.png" type="Texture" id=4]
+[ext_resource path="res://assests/enemy/skeleton_animations/walk/skeleton walk 1.png" type="Texture" id=5]
+[ext_resource path="res://assests/enemy/skeleton_animations/walk/skeleton walk 3.png" type="Texture" id=6]
+[ext_resource path="res://assests/enemy/skeleton_animations/walk/skeleton walk 4.png" type="Texture" id=7]
+[ext_resource path="res://assests/enemy/skeleton_animations/walk/skeleton walk 2.png" type="Texture" id=8]
+[ext_resource path="res://assests/enemy/skeleton_animations/walk/skeleton walk 5.png" type="Texture" id=9]
+[ext_resource path="res://assests/enemy/skeleton_animations/walk/skeleton walk 6.png" type="Texture" id=10]
+[ext_resource path="res://assests/enemy/skeleton_animations/charge/Sword_charge_2.png" type="Texture" id=11]
+[ext_resource path="res://assests/enemy/skeleton_animations/charge/Sword_charge_1.png" type="Texture" id=12]
+[ext_resource path="res://assests/enemy/skeleton_animations/charge/Sword_charge_3.png" type="Texture" id=13]
+[ext_resource path="res://assests/enemy/skeleton_animations/charge/Sword_charge_4.png" type="Texture" id=14]
+[ext_resource path="res://assests/enemy/skeleton_animations/charge/Sword_charge_5.png" type="Texture" id=15]
+[ext_resource path="res://assests/enemy/skeleton_animations/charge/Sword_charge_6.png" type="Texture" id=16]
+[ext_resource path="res://assests/enemy/skeleton_animations/charge/Sword_charge_7.png" type="Texture" id=17]
+[ext_resource path="res://assests/enemy/skeleton_animations/attack/skeleton_attack_2.png" type="Texture" id=18]
+[ext_resource path="res://assests/enemy/skeleton_animations/attack/skeleton_attack_1.png" type="Texture" id=19]
+[ext_resource path="res://assests/enemy/skeleton_animations/attack/skeleton_attack_3.png" type="Texture" id=20]
+[ext_resource path="res://assests/enemy/skeleton_animations/attack/skeleton_attack_4.png" type="Texture" id=21]
+[ext_resource path="res://assests/enemy/skeleton_animations/attack/skeleton_attack_5.png" type="Texture" id=22]
+[ext_resource path="res://assests/enemy/skeleton_animations/attack/skeleton_attack_6.png" type="Texture" id=23]
+[ext_resource path="res://assests/enemy/skeleton_animations/attack/skeleton_attack_7.png" type="Texture" id=24]
+[ext_resource path="res://assests/enemy/skeleton_animations/knockback/knockback.png" type="Texture" id=25]
+[ext_resource path="res://assests/hud/bars/healthbar.png" type="Texture" id=26]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 25 ) ],
+"loop": true,
+"name": "knockback",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 19 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "attack",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "charge",
+"speed": 5.0
+} ]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 3.97484
+height = 21.2618
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 3.69704, 2.625 )
+
+[sub_resource type="Animation" id=5]
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "attack" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("player_detections/slash_attack/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "charge" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 0.8, 1.2, 1.5, 1.9, 2.3, 2.9, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 1, 0, 0, 1, 2, 2, 0 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.4
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_idle"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.0108495, 0.0349032, 0.132364, 0.264382, 0.388411 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.956863, 0.956863, 0.956863, 1 ), Color( 0.501961, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0.862745, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "knockback" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.378647 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("player_detections/slash_attack/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 1.5
+
+[sub_resource type="Animation" id=10]
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "walk" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 47.2693, 31.5052 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 31.289, 32.8919 )
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 7.38669, 12.2222 )
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 124.969, 55.0054 )
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 10.8076, 12.2148 )
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 10.4887, 16.0974 )
+
+[node name="enemy" type="KinematicBody2D" groups=[
+"Enemy",
+]]
+modulate = Color( 0.933333, 0.894118, 0.894118, 1 )
+collision_layer = 2
+collision_mask = 4
+script = ExtResource( 2 )
+
+[node name="health_bar" type="TextureProgress" parent="."]
+margin_left = -15.6751
+margin_top = -12.0883
+margin_right = 144.325
+margin_bottom = 12.9117
+rect_scale = Vector2( 0.2, 0.2 )
+texture_progress = ExtResource( 26 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "idle"
+
+[node name="A_label" type="Label" parent="."]
+material = SubResource( 2 )
+margin_left = -20.4234
+margin_top = -33.9986
+margin_right = 45.5766
+margin_bottom = -19.9986
+rect_scale = Vector2( 0.6, 0.6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main_Collision" type="CollisionShape2D" parent="."]
+position = Vector2( -0.955812, 9.60277 )
+shape = SubResource( 3 )
+
+[node name="leg_collision" type="CollisionShape2D" parent="."]
+position = Vector2( -0.789373, 22.0274 )
+shape = SubResource( 4 )
+
+[node name="ground_detector" type="RayCast2D" parent="."]
+position = Vector2( 20, 11.006 )
+scale = Vector2( 0.7, 0.5 )
+enabled = true
+collision_mask = 4
+
+[node name="Jump_detect" type="RayCast2D" parent="."]
+position = Vector2( 0, 20 )
+rotation = -1.5708
+scale = Vector2( 0.6, 0.3 )
+enabled = true
+collision_mask = 4
+
+[node name="walk_timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="idle_timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Attack = SubResource( 5 )
+anims/charge = SubResource( 6 )
+anims/idle = SubResource( 7 )
+anims/knockback = SubResource( 8 )
+anims/tease = SubResource( 9 )
+anims/walk = SubResource( 10 )
+
+[node name="player_detections" type="Node2D" parent="."]
+visible = false
+
+[node name="player_detect" type="Area2D" parent="player_detections"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_detections/player_detect"]
+position = Vector2( 55.437, 4.45471 )
+shape = SubResource( 11 )
+
+[node name="player_back_detect" type="Area2D" parent="player_detections"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_detections/player_back_detect"]
+modulate = Color( 0.576471, 0.466667, 0.466667, 1 )
+position = Vector2( -40.2705, 6.45718 )
+shape = SubResource( 12 )
+
+[node name="attack_detect" type="Area2D" parent="player_detections"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_detections/attack_detect"]
+modulate = Color( 0.0392157, 0.768627, 0.117647, 1 )
+position = Vector2( 12.762, 12.5972 )
+shape = SubResource( 13 )
+
+[node name="chase_exit" type="Area2D" parent="player_detections"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_detections/chase_exit"]
+modulate = Color( 0.831373, 0.00784314, 0.00784314, 1 )
+position = Vector2( 33.0901, -11.4258 )
+shape = SubResource( 14 )
+
+[node name="slash_attack" type="Area2D" parent="player_detections"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_detections/slash_attack"]
+modulate = Color( 0.92549, 0.294118, 0.945098, 1 )
+position = Vector2( 15.4644, 12.0018 )
+shape = SubResource( 15 )
+disabled = true
+
+[node name="incoming_attack_detect" type="Area2D" parent="player_detections" groups=[
+"Enemy",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_detections/incoming_attack_detect"]
+modulate = Color( 0.909804, 0.0627451, 0.639216, 1 )
+self_modulate = Color( 0.647059, 0.054902, 0.945098, 1 )
+position = Vector2( -0.111362, 8.90899 )
+shape = SubResource( 16 )
+
+[connection signal="timeout" from="walk_timer" to="." method="_on_walk_timer_timeout"]
+[connection signal="timeout" from="idle_timer" to="." method="_on_idle_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="player_detections/player_detect" to="." method="_on_player_detect_body_entered"]
+[connection signal="body_entered" from="player_detections/player_back_detect" to="." method="_on_player_back_detect_body_entered"]
+[connection signal="body_entered" from="player_detections/attack_detect" to="." method="_on_attack_detect_body_entered"]
+[connection signal="body_exited" from="player_detections/attack_detect" to="." method="_on_attack_detect_body_exited"]
+[connection signal="body_exited" from="player_detections/chase_exit" to="." method="_on_chase_exit_body_exited"]
+[connection signal="body_entered" from="player_detections/slash_attack" to="." method="_on_slash_attack_body_entered"]

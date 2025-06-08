@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assests/world/WORLD assests/houses/Light_House/light house.png" type="Texture" id=1]
+[ext_resource path="res://assests/world/WORLD assests/houses/Light_House/light house interior.png" type="Texture" id=2]
+[ext_resource path="res://assests/world/WORLD assests/houses/Light_House/Light_house.gd" type="Script" id=3]
+[ext_resource path="res://assests/world/WORLD assests/design/bonfire/bloom.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 78.5173, 81.6786 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "animation"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("close:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("open/Light2D:enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("open/Light2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.8, 1.8 ]
+}
+
+[node name="Light_house" type="StaticBody2D"]
+modulate = Color( 1.1, 1.1, 1.1, 1 )
+scale = Vector2( 1.2, 1.3 )
+collision_layer = 8
+collision_mask = 9
+script = ExtResource( 3 )
+
+[node name="open" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="open"]
+position = Vector2( 4, 65 )
+texture = ExtResource( 4 )
+
+[node name="close" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 49.2153, 88.1391, 36.4561, 83.0507, -27.7085, 82.7172, -27.7656, 50.9008, 44.6259, 51.0395, 43.9027, -9.22906, -21.5047, -9.58262, -45.5464, 30.3689, -45.6678, 87.4973 )
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -0.347344, 8.10648 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/animation = SubResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+show_behind_parent = true
+position = Vector2( -42.0314, -59.3208 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 4 )
+texture_scale = 1.5
+color = Color( 0.976471, 0.811765, 0.164706, 1 )
+energy = 1.42
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

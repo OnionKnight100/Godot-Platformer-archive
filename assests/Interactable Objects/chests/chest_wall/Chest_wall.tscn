@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assests/Interactable Objects/chests/chest_wall/Chest_wall.gd" type="Script" id=1]
+[ext_resource path="res://assests/Interactable Objects/chests/chest_wall/chest_closed.png" type="Texture" id=2]
+[ext_resource path="res://assests/Interactable Objects/chests/chest_wall/chest_open.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 17.1813, 10.6058 )
+
+[node name="chest_wall" type="Area2D"]
+script = ExtResource( 1 )
+
+[node name="chest_closed" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="chest_open" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1.23744, 3.0052 )
+shape = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -12.9779
+margin_top = -19.9329
+margin_right = 41.0221
+margin_bottom = -5.93287
+rect_scale = Vector2( 0.5, 0.5 )
+text = "(E) Open"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="body_entered" from="." to="." method="_on_chest_wall_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_chest_wall_body_exited"]
